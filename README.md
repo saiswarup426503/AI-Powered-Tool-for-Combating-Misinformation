@@ -3,7 +3,6 @@ live at https://ai-powered-tool-for-combating-misinformation-o5nag4mzy.vercel.ap
 
 This contains everything you need to run your app locally.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1Gu3zYJGOpzEjPgSO9-OGjyzuf-QT0jf3
 
 ## Run Locally
 
