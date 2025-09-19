@@ -8,11 +8,12 @@ export default defineConfig(({ mode }) => {
       'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
     },
-    base: process.env.VITE_BASE || '/AI-Powered-Tool-for-Combating-Misinformation',
+    base: mode === 'production' ? '/' : '/AI-Powered-Tool-for-Combating-Misinformation',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
       }
     }
-  };
-});
+  }
+}
+);
