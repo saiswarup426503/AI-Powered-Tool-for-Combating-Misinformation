@@ -1,0 +1,7 @@
+{
+  "name": "AI Misinformation Detector",
+  "description": "An AI-powered tool that analyzes text content to detect potential misinformation, scams, and manipulative techniques, while educating users on how to identify credible information.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
