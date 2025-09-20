@@ -1,4 +1,4 @@
-live at https://ai-powered-tool-for-combating-misinformation-o5nag4mzy.vercel.app/
+live at https://ai-powered-tool-for-combating-misinformation-cbp8x7fkv.vercel.app
 
 
 This contains everything you need to run your app locally.
