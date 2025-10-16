@@ -3,6 +3,7 @@ import { analyzeContent, AnalysisInput } from '../services/geminiService';
 import { FullAnalysis } from '../types';
 import { AnalysisResult } from './AnalysisResult';
 
+<<<<<<< HEAD
 const WelcomeMessage = () => {
     const [currentSection, setCurrentSection] = useState(0);
     const sections = [
@@ -165,6 +166,16 @@ const WelcomeMessage = () => {
         </div>
     );
 };
+=======
+const WelcomeMessage = () => (
+    <div className="text-center p-8 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg bg-slate-100 dark:bg-slate-800">
+        <h2 className="text-xl font-semibold mb-2">Welcome to the Misinformation Detector</h2>
+        <p className="text-slate-600 dark:text-slate-400">
+            Choose an input type above—Text, Image, PDF, or Webpage—to begin your analysis.
+        </p>
+    </div>
+);
+>>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
 
 const loadingMessages = [
     "Initializing analysis...",
@@ -188,6 +199,10 @@ const LoadingSpinner: React.FC<{ message: string }> = ({ message }) => (
     </div>
 );
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
 const ErrorMessage: React.FC<{ message: string }> = ({ message }) => (
     <div className="p-4 border-l-4 border-red-500 bg-red-100 dark:bg-red-900/20 rounded-r-lg">
         <h3 className="font-bold text-red-800 dark:text-red-300">Analysis Failed</h3>
@@ -255,6 +270,10 @@ const languages = [
     { name: 'Xhosa' }, { name: 'Yiddish' }, { name: 'Yoruba' }, { name: 'Zulu' }
 ].sort((a, b) => a.name.localeCompare(b.name));
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
 export const MisinformationAnalyzer: React.FC = () => {
     const [mode, setMode] = useState<Mode>('text');
     const [inputText, setInputText] = useState<string>('');
@@ -296,6 +315,10 @@ export const MisinformationAnalyzer: React.FC = () => {
         };
     }, []);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setError(null);
         const selectedFile = e.target.files?.[0];
@@ -518,6 +541,7 @@ export const MisinformationAnalyzer: React.FC = () => {
     }
 
     return (
+<<<<<<< HEAD
         <div className="space-y-6">
             {!isLoading && !error && !analysisResult && <WelcomeMessage />}
 
@@ -568,12 +592,64 @@ export const MisinformationAnalyzer: React.FC = () => {
                         {isLoading ? 'Analyzing...' : 'Analyze Content'}
                     </button>
                 </div>
+=======
+        <div className="max-w-4xl mx-auto space-y-6">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg">
+                <div className="flex items-center justify-center space-x-2 sm:space-x-4 mb-6">
+                    <TabButton active={mode === 'text'} onClick={() => resetInputs('text')}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 11-2 0V4a1 1 0 00-1-1H7a1 1 0 00-1 1v12a1 1 0 11-2 0V4z" clipRule="evenodd" /></svg>
+                        <span>Text</span>
+                    </TabButton>
+                    <TabButton active={mode === 'image'} onClick={() => resetInputs('image')}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" /></svg>
+                        <span>Image</span>
+                    </TabButton>
+                    <TabButton active={mode === 'pdf'} onClick={() => resetInputs('pdf')}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
+                        <span>PDF</span>
+                    </TabButton>
+                    <TabButton active={mode === 'url'} onClick={() => resetInputs('url')}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0m-2.828-2.828a2 2 0 012.828 0l3 3a2 2 0 11-2.828 2.828m-2.828 5.656a2 2 0 10-2.828-2.828l-3-3a2 2 0 102.828-2.828l3 3a2 2 0 002.828 2.828z" clipRule="evenodd" /></svg>
+                        <span>Webpage</span>
+                    </TabButton>
+                </div>
+
+                {renderInputArea()}
+
+                <div className="mt-4">
+                    <label htmlFor="language-select" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        Report Language
+                    </label>
+                    <select
+                        id="language-select"
+                        value={outputLanguage}
+                        onChange={(e) => setOutputLanguage(e.target.value)}
+                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700"
+                        disabled={isLoading}
+                        aria-label="Select report language"
+                    >
+                        {languages.map(lang => <option key={lang.name} value={lang.name}>{lang.name}</option>)}
+                    </select>
+                </div>
+
+                <button
+                    onClick={handleAnalyze}
+                    disabled={isAnalyzeDisabled}
+                    className="mt-4 w-full flex items-center justify-center bg-blue-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-slate-400 disabled:cursor-not-allowed dark:focus:ring-offset-slate-900 transition duration-150"
+                >
+                    {isLoading ? 'Analyzing...' : 'Analyze Content'}
+                </button>
+>>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
             </div>
 
             <div className="mt-6">
                 {isLoading && <LoadingSpinner message={loadingMessage} />}
                 {error && !isLoading && <ErrorMessage message={error} />}
                 {analysisResult && !isLoading && <AnalysisResult result={analysisResult} />}
+<<<<<<< HEAD
+=======
+                {!isLoading && !error && !analysisResult && <WelcomeMessage />}
+>>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
             </div>
         </div>
     );
