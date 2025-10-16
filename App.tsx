@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { Header } from './components/Header';
 import { MisinformationAnalyzer } from './components/MisinformationAnalyzer';
 
 const App: React.FC = () => {
   return (
-<<<<<<< HEAD
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* Dynamic Animated Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 animate-gradient-x"></div>
@@ -15,7 +13,7 @@ const App: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <Header />
-        <main className="flex-grow container mx-auto px-4 py-8">
+        <main className="flex-grow">
           <MisinformationAnalyzer />
         </main>
         <footer className="text-center py-4 text-xs text-slate-500 dark:text-slate-400">
@@ -23,23 +21,8 @@ const App: React.FC = () => {
           <p>&copy; 2025 AI Misinformation Detector. All rights reserved.</p>
         </footer>
       </div>
-=======
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow container mx-auto px-4 py-8">
-        <MisinformationAnalyzer />
-      </main>
-      <footer className="text-center py-4 text-xs text-slate-500 dark:text-slate-400">
-        <p>Disclaimer: This AI-powered tool provides an analysis based on common patterns of misinformation and is intended for educational purposes. It is not a substitute for professional fact-checking or critical thinking. Always verify information from multiple reputable sources.</p>
-        <p>&copy; 2025 AI Misinformation Detector. All rights reserved.</p>
-      </footer>
->>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default App;
-=======
-export default App;
->>>>>>> d341868d91c09f688e0151d0149839e027c3a83e

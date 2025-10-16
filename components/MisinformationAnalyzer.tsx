@@ -3,179 +3,103 @@ import { analyzeContent, AnalysisInput } from '../services/geminiService';
 import { FullAnalysis } from '../types';
 import { AnalysisResult } from './AnalysisResult';
 
-<<<<<<< HEAD
-const WelcomeMessage = () => {
-    const [currentSection, setCurrentSection] = useState(0);
-    const sections = [
-        {
-            icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-blue-600 dark:text-blue-400 mb-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9.75v6.75m0 0l-3-3m3 3l3-3m-8.25-4.5h16.5M4.5 12h16.5m-16.5 3.75h16.5" />
-            </svg>,
-            title: "Welcome to the AI Misinformation Detector",
-            content: (
-                <div className="text-center">
-                    <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-6">
-                        In our hyper-connected digital world, artificial intelligence has revolutionized content creation, but it also amplifies the spread of false information at unprecedented speeds.
-                    </p>
-                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
-                        <p className="text-slate-700 dark:text-slate-300">
-                            AI-generated deepfakes, synthetic media, and automated content farms can create and distribute misleading narratives across social media platforms in minutes, reaching millions before traditional fact-checking can catch up.
-                        </p>
-                    </div>
-                </div>
-            )
-        },
-        {
-            icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-amber-600 dark:text-amber-400 mb-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>,
-            title: "Why Detection Matters Now More Than Ever",
-            content: (
-                <div className="text-center">
-                    <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-6">
-                        The proliferation of AI tools has democratized content creation, but also lowered the barriers for malicious actors.
-                    </p>
-                    <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 p-4 rounded-lg border border-amber-200 dark:border-amber-800">
-                        <p className="text-slate-700 dark:text-slate-300">
-                            From election interference to public health crises, AI-powered misinformation can manipulate public opinion, erode trust in institutions, and even incite real-world harm. Early detection and critical analysis are crucial in maintaining an informed society.
-                        </p>
-                    </div>
-                </div>
-            )
-        },
-        {
-            icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-green-600 dark:text-green-400 mb-4 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>,
-            title: "How Our AI Detector Helps",
-            content: (
-                <div className="text-center">
-                    <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-6">
-                        This tool leverages advanced AI algorithms to analyze content for manipulative patterns, cross-reference information with reliable sources, and provide credibility assessments.
-                    </p>
-                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-4 rounded-lg border border-green-200 dark:border-green-800">
-                        <p className="text-slate-700 dark:text-slate-300">
-                            While not infallible, it serves as a powerful ally in the fight against digital deception, helping users make informed decisions in an era of information overload.
-                        </p>
-                    </div>
-                </div>
-            )
-        }
-    ];
+const WelcomeMessage = () => (
+    <div className="relative overflow-hidden w-full h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 animate-fade-in">
+        {/* Logo Watermark */}
+        <div className="absolute inset-0 opacity-5 bg-center bg-no-repeat bg-contain" style={{ backgroundImage: `url("data:image/svg+xml,%3csvg width='400' height='400' viewBox='0 0 400 400' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3e%3cstop offset='0%25' style='stop-color:%233b82f6;stop-opacity:1' /%3e%3cstop offset='100%25' style='stop-color:%231e40af;stop-opacity:1' /%3e%3c/linearGradient%3e%3c/defs%3e%3ccircle cx='200' cy='200' r='180' fill='url(%23grad1)' opacity='0.1'/%3e%3cpath d='M200 50 L320 120 L320 280 Q320 320 280 340 L200 380 L120 340 Q80 320 80 280 L80 120 Z' fill='url(%23grad1)' opacity='0.8'/%3e%3ctext x='200' y='180' text-anchor='middle' font-family='Arial, sans-serif' font-size='48' font-weight='bold' fill='white'%3eAI%3c/text%3e%3ctext x='200' y='220' text-anchor='middle' font-family='Arial, sans-serif' font-size='18' font-weight='bold' fill='white'%3eDETECTOR%3c/text%3e%3ccircle cx='200' cy='140' r='20' fill='none' stroke='white' stroke-width='3'/%3e%3ccircle cx='200' cy='140' r='8' fill='white'/%3e%3ccircle cx='200' cy='140' r='3' fill='%232563eb'/%3e%3c/svg%3e")` }}></div>
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentSection((prev) => (prev + 1) % sections.length);
-        }, 4000);
-        return () => clearInterval(interval);
-    }, [sections.length]);
-
-    return (
-        <div className="welcome-section w-full min-h-screen p-8 animate-fade-in relative overflow-hidden flex items-center">
-            {/* Enhanced Watermark Logo */}
-            <div className="fixed inset-0 flex items-center justify-center opacity-5 pointer-events-none z-0">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-[120vh] w-[120vh] text-blue-600 dark:text-blue-400 animate-spin-slow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={0.3}>
-                    <defs>
-                        <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#3B82F6" />
-                            <stop offset="50%" stopColor="#8B5CF6" />
-                            <stop offset="100%" stopColor="#06B6D4" />
-                        </linearGradient>
-                    </defs>
-                    <path fill="url(#shieldGradient)" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    <circle cx="12" cy="10" r="3" fill="white" opacity="0.8" />
-                    <path stroke="white" strokeWidth="1" d="M12 13v3m-1-3h2" opacity="0.8" />
-                </svg>
+        <div className="relative p-8 md:p-12">
+            {/* Hero Section */}
+            <div className="text-center mb-10">
+                <div className="relative inline-block mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
+                    <img
+                        src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=120&h=120&fit=crop&crop=center"
+                        alt="AI Analysis"
+                        className="relative w-24 h-24 rounded-full object-cover border-4 border-white dark:border-slate-700 shadow-lg"
+                    />
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                    AI Misinformation Detector
+                </h1>
+                <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                    In today's digital landscape, misinformation spreads like wildfire through AI-generated content.
+                    Our advanced tool analyzes and verifies information from multiple sources to help you combat false narratives.
+                </p>
             </div>
 
-            {/* Floating particles effect */}
-            <div className="absolute inset-0 pointer-events-none z-0">
-                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full animate-bounce opacity-30"></div>
-                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-purple-400 rounded-full animate-ping opacity-40"></div>
-                <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse opacity-25"></div>
+            {/* Feature Cards */}
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+                <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
+                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                        <img
+                            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=48&h=48&fit=crop&crop=center"
+                            alt="Text Analysis"
+                            className="w-8 h-8 object-cover rounded"
+                        />
+                    </div>
+                    <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-2">Text Analysis</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Analyze articles, posts, and documents for factual accuracy and bias detection.</p>
+                </div>
+
+                <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
+                    <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                        <img
+                            src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=48&h=48&fit=crop&crop=center"
+                            alt="Image Verification"
+                            className="w-8 h-8 object-cover rounded"
+                        />
+                    </div>
+                    <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-2">Image & Media</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Verify images, PDFs, and multimedia content for manipulation and authenticity.</p>
+                </div>
+
+                <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
+                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                        <img
+                            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=48&h=48&fit=crop&crop=center"
+                            alt="Web Analysis"
+                            className="w-8 h-8 object-cover rounded"
+                        />
+                    </div>
+                    <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-2">Web Content</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Scrape and analyze web pages, news articles, and online content sources.</p>
+                </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-                {/* Left side - Information */}
-                <div className="space-y-8 backdrop-blur-sm bg-white/5 dark:bg-slate-800/5 p-8 rounded-3xl border border-white/10 dark:border-slate-700/10 shadow-2xl">
-                    <div className="text-left">
-                        <div className="mb-4 transform hover:scale-105 transition-transform duration-300">
-                            {sections[currentSection].icon}
-                        </div>
-                        <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 dark:from-blue-400 dark:via-purple-400 dark:to-cyan-400 bg-clip-text text-transparent animate-pulse leading-tight">
-                            {sections[currentSection].title}
-                        </h2>
-                    </div>
-
-                    <div className="text-lg leading-relaxed">
-                        {sections[currentSection].content}
-                    </div>
-
-                    <div className="flex justify-start space-x-3">
-                        {sections.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentSection(index)}
-                                className={`w-4 h-4 rounded-full transition-all duration-500 hover:scale-125 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 ${index === currentSection
-                                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-125 shadow-lg'
-                                    : 'bg-slate-300 dark:bg-slate-600 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500'
-                                    }`}
-                                aria-label={`Go to section ${index + 1}`}
-                            />
-                        ))}
-                    </div>
-
-                    <div className="p-6 bg-gradient-to-r from-slate-50/80 to-blue-50/80 dark:from-slate-800/80 dark:to-blue-900/80 rounded-2xl border border-slate-200/50 dark:border-slate-600/50 backdrop-blur-sm">
-                        <p className="text-slate-700 dark:text-slate-300 font-medium text-left leading-relaxed">
-                            Choose an input type above—Text, Image, PDF, or Webpage—to begin your analysis and stay ahead of the misinformation curve.
-                        </p>
-                    </div>
+            {/* Call to Action */}
+            <div className="text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-6 text-white">
+                <h3 className="text-xl font-semibold mb-2">Ready to Get Started?</h3>
+                <p className="mb-4 opacity-90">Choose an input type above—Text, Image, PDF, or Webpage—to begin your analysis and stay informed.</p>
+                <div className="flex justify-center space-x-4 text-sm">
+                    <span className="flex items-center">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        AI-Powered Analysis
+                    </span>
+                    <span className="flex items-center">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Multi-Language Support
+                    </span>
+                    <span className="flex items-center">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        Real-time Results
+                    </span>
                 </div>
+            </div>
 
-                {/* Right side - Enhanced Photo */}
-                <div className="flex justify-center lg:justify-end">
-                    <div className="relative group">
-                        <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                        <div className="relative bg-gradient-to-br from-green-400/10 to-blue-500/10 p-8 rounded-3xl border border-green-300/20 dark:border-green-600/20 backdrop-blur-sm shadow-2xl">
-                            <div className="grid grid-cols-2 gap-4 mb-4">
-                                <div className="flex items-center justify-center space-x-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-green-500 dark:text-green-400 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-500 dark:text-blue-400 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                    </svg>
-                                </div>
-                                <div className="flex items-center justify-center space-x-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-purple-500 dark:text-purple-400 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-cyan-500 dark:text-cyan-400 animate-ping" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-slate-800 dark:text-slate-200 drop-shadow-lg mb-2">Search</div>
-                                <div className="text-lg text-slate-600 dark:text-slate-400 drop-shadow">Analyze before you Share</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {/* Footer */}
+            <div className="text-center mt-8 text-sm text-slate-500 dark:text-slate-400">
+                <p>Powered by advanced AI technology for accurate detection and comprehensive analysis.</p>
             </div>
         </div>
-    );
-};
-=======
-const WelcomeMessage = () => (
-    <div className="text-center p-8 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg bg-slate-100 dark:bg-slate-800">
-        <h2 className="text-xl font-semibold mb-2">Welcome to the Misinformation Detector</h2>
-        <p className="text-slate-600 dark:text-slate-400">
-            Choose an input type above—Text, Image, PDF, or Webpage—to begin your analysis.
-        </p>
-    </div>
+    </div >
 );
->>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
 
 const loadingMessages = [
     "Initializing analysis...",
@@ -199,10 +123,6 @@ const LoadingSpinner: React.FC<{ message: string }> = ({ message }) => (
     </div>
 );
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
 const ErrorMessage: React.FC<{ message: string }> = ({ message }) => (
     <div className="p-4 border-l-4 border-red-500 bg-red-100 dark:bg-red-900/20 rounded-r-lg">
         <h3 className="font-bold text-red-800 dark:text-red-300">Analysis Failed</h3>
@@ -270,10 +190,6 @@ const languages = [
     { name: 'Xhosa' }, { name: 'Yiddish' }, { name: 'Yoruba' }, { name: 'Zulu' }
 ].sort((a, b) => a.name.localeCompare(b.name));
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
 export const MisinformationAnalyzer: React.FC = () => {
     const [mode, setMode] = useState<Mode>('text');
     const [inputText, setInputText] = useState<string>('');
@@ -315,10 +231,6 @@ export const MisinformationAnalyzer: React.FC = () => {
         };
     }, []);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setError(null);
         const selectedFile = e.target.files?.[0];
@@ -541,116 +453,65 @@ export const MisinformationAnalyzer: React.FC = () => {
     }
 
     return (
-<<<<<<< HEAD
-        <div className="space-y-6">
-            {!isLoading && !error && !analysisResult && <WelcomeMessage />}
+        <>
+            <WelcomeMessage />
+            <div className="container mx-auto px-4 py-8">
+                <hr className="my-8 border-slate-300 dark:border-slate-700" />
+                <div className="max-w-4xl mx-auto">
+                    <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg">
+                        <div className="flex items-center justify-center space-x-2 sm:space-x-4 mb-6">
+                            <TabButton active={mode === 'text'} onClick={() => resetInputs('text')}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 11-2 0V4a1 1 0 00-1-1H7a1 1 0 00-1 1v12a1 1 0 11-2 0V4z" clipRule="evenodd" /></svg>
+                                <span>Text</span>
+                            </TabButton>
+                            <TabButton active={mode === 'image'} onClick={() => resetInputs('image')}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" /></svg>
+                                <span>Image</span>
+                            </TabButton>
+                            <TabButton active={mode === 'pdf'} onClick={() => resetInputs('pdf')}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
+                                <span>PDF</span>
+                            </TabButton>
+                            <TabButton active={mode === 'url'} onClick={() => resetInputs('url')}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0m-2.828-2.828a2 2 0 012.828 0l3 3a2 2 0 11-2.828 2.828m-2.828 5.656a2 2 0 10-2.828-2.828l-3-3a2 2 0 102.828-2.828l3 3a2 2 0 002.828 2.828z" clipRule="evenodd" /></svg>
+                                <span>Webpage</span>
+                            </TabButton>
+                        </div>
 
-            <div className="max-w-4xl mx-auto">
-                <div className="input-section bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg">
-                    <div className="flex items-center justify-center space-x-2 sm:space-x-4 mb-6">
-                        <TabButton active={mode === 'text'} onClick={() => resetInputs('text')}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 11-2 0V4a1 1 0 00-1-1H7a1 1 0 00-1 1v12a1 1 0 11-2 0V4z" clipRule="evenodd" /></svg>
-                            <span>Text</span>
-                        </TabButton>
-                        <TabButton active={mode === 'image'} onClick={() => resetInputs('image')}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" /></svg>
-                            <span>Image</span>
-                        </TabButton>
-                        <TabButton active={mode === 'pdf'} onClick={() => resetInputs('pdf')}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                            <span>PDF</span>
-                        </TabButton>
-                        <TabButton active={mode === 'url'} onClick={() => resetInputs('url')}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0m-2.828-2.828a2 2 0 012.828 0l3 3a2 2 0 11-2.828 2.828m-2.828 5.656a2 2 0 10-2.828-2.828l-3-3a2 2 0 102.828-2.828l3 3a2 2 0 002.828 2.828z" clipRule="evenodd" /></svg>
-                            <span>Webpage</span>
-                        </TabButton>
-                    </div>
+                        {renderInputArea()}
 
-                    {renderInputArea()}
+                        <div className="mt-4">
+                            <label htmlFor="language-select" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                                Report Language
+                            </label>
+                            <select
+                                id="language-select"
+                                value={outputLanguage}
+                                onChange={(e) => setOutputLanguage(e.target.value)}
+                                className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700"
+                                disabled={isLoading}
+                                aria-label="Select report language"
+                            >
+                                {languages.map(lang => <option key={lang.name} value={lang.name}>{lang.name}</option>)}
+                            </select>
+                        </div>
 
-                    <div className="mt-4">
-                        <label htmlFor="language-select" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                            Report Language
-                        </label>
-                        <select
-                            id="language-select"
-                            value={outputLanguage}
-                            onChange={(e) => setOutputLanguage(e.target.value)}
-                            className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700"
-                            disabled={isLoading}
-                            aria-label="Select report language"
+                        <button
+                            onClick={handleAnalyze}
+                            disabled={isAnalyzeDisabled}
+                            className="mt-4 w-full flex items-center justify-center bg-blue-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-slate-400 disabled:cursor-not-allowed dark:focus:ring-offset-slate-900 transition duration-150"
                         >
-                            {languages.map(lang => <option key={lang.name} value={lang.name}>{lang.name}</option>)}
-                        </select>
+                            {isLoading ? 'Analyzing...' : 'Analyze Content'}
+                        </button>
                     </div>
 
-                    <button
-                        onClick={handleAnalyze}
-                        disabled={isAnalyzeDisabled}
-                        className="mt-4 w-full flex items-center justify-center bg-blue-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-slate-400 disabled:cursor-not-allowed dark:focus:ring-offset-slate-900 transition duration-150"
-                    >
-                        {isLoading ? 'Analyzing...' : 'Analyze Content'}
-                    </button>
+                    <div className="mt-6">
+                        {isLoading && <LoadingSpinner message={loadingMessage} />}
+                        {error && !isLoading && <ErrorMessage message={error} />}
+                        {analysisResult && !isLoading && <AnalysisResult result={analysisResult} />}
+                    </div>
                 </div>
-=======
-        <div className="max-w-4xl mx-auto space-y-6">
-            <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg">
-                <div className="flex items-center justify-center space-x-2 sm:space-x-4 mb-6">
-                    <TabButton active={mode === 'text'} onClick={() => resetInputs('text')}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 11-2 0V4a1 1 0 00-1-1H7a1 1 0 00-1 1v12a1 1 0 11-2 0V4z" clipRule="evenodd" /></svg>
-                        <span>Text</span>
-                    </TabButton>
-                    <TabButton active={mode === 'image'} onClick={() => resetInputs('image')}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" /></svg>
-                        <span>Image</span>
-                    </TabButton>
-                    <TabButton active={mode === 'pdf'} onClick={() => resetInputs('pdf')}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                        <span>PDF</span>
-                    </TabButton>
-                    <TabButton active={mode === 'url'} onClick={() => resetInputs('url')}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0m-2.828-2.828a2 2 0 012.828 0l3 3a2 2 0 11-2.828 2.828m-2.828 5.656a2 2 0 10-2.828-2.828l-3-3a2 2 0 102.828-2.828l3 3a2 2 0 002.828 2.828z" clipRule="evenodd" /></svg>
-                        <span>Webpage</span>
-                    </TabButton>
-                </div>
-
-                {renderInputArea()}
-
-                <div className="mt-4">
-                    <label htmlFor="language-select" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                        Report Language
-                    </label>
-                    <select
-                        id="language-select"
-                        value={outputLanguage}
-                        onChange={(e) => setOutputLanguage(e.target.value)}
-                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700"
-                        disabled={isLoading}
-                        aria-label="Select report language"
-                    >
-                        {languages.map(lang => <option key={lang.name} value={lang.name}>{lang.name}</option>)}
-                    </select>
-                </div>
-
-                <button
-                    onClick={handleAnalyze}
-                    disabled={isAnalyzeDisabled}
-                    className="mt-4 w-full flex items-center justify-center bg-blue-600 text-white font-semibold py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-slate-400 disabled:cursor-not-allowed dark:focus:ring-offset-slate-900 transition duration-150"
-                >
-                    {isLoading ? 'Analyzing...' : 'Analyze Content'}
-                </button>
->>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
             </div>
-
-            <div className="mt-6">
-                {isLoading && <LoadingSpinner message={loadingMessage} />}
-                {error && !isLoading && <ErrorMessage message={error} />}
-                {analysisResult && !isLoading && <AnalysisResult result={analysisResult} />}
-<<<<<<< HEAD
-=======
-                {!isLoading && !error && !analysisResult && <WelcomeMessage />}
->>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
-            </div>
-        </div>
+        </>
     );
 };
