@@ -37,7 +37,7 @@ const CredibilityGauge: React.FC<{ score: number }> = ({ score }) => {
     };
 
     const colors = getScoreColor(score);
-    const radius = 85;
+    const radius = 65;
     const strokeWidth = 15;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference - (score / 100) * circumference;
