@@ -1,9 +1,7 @@
-# TODO: Improve View with Dynamic Color Pattern and AI Misinformation Content
+# TODO: Redesign AnalysisResult to Card Layout
 
-## Tasks
-- [x] Add dynamic animated gradient background to App.tsx for visual appeal
-- [x] Enhance WelcomeMessage component in MisinformationAnalyzer.tsx with detailed content about AI misinformation circulation
-- [x] Add subtle animations for better UX (e.g., ensure fade-in effects are smooth)
-- [x] Test responsiveness across screen sizes
-- [x] Verify dark mode compatibility
-- [x] Ensure no performance impact from animations
+- [x] Wrap credibility score and risk level section in a card
+- [x] Wrap classification section in a card
+- [x] Wrap corrected information section in a card
+- [x] Wrap detected techniques section in a card
+- [x] Wrap sources section in a card

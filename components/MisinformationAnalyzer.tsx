@@ -472,7 +472,7 @@ export const MisinformationAnalyzer: React.FC = () => {
             <WelcomeMessage />
             <div className="container mx-auto px-4 py-8">
                 <hr className="my-8 border-slate-300 dark:border-slate-700" />
-                <div className="max-w-4xl mx-auto">
+                <div className="w-full space-y-6">
                     <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg">
                         <div className="flex items-center justify-center space-x-2 sm:space-x-4 mb-6">
                             <TabButton active={mode === 'text'} onClick={() => resetInputs('text')}>
@@ -520,7 +520,8 @@ export const MisinformationAnalyzer: React.FC = () => {
                         </button>
                     </div>
 
-                    <div className="mt-6">
+                    <div className="bg-slate-50 dark:bg-slate-700 p-6 rounded-lg shadow-lg border border-slate-200 dark:border-slate-600">
+                        <h2 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Analysis Results</h2>
                         {isLoading && <LoadingSpinner message={loadingMessage} />}
                         {error && !isLoading && <ErrorMessage message={error} />}
                         {analysisResult && !isLoading && <AnalysisResult result={analysisResult} />}
