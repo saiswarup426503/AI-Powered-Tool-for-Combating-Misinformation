@@ -4,33 +4,74 @@ import { FullAnalysis } from '../types';
 import { AnalysisResult } from './AnalysisResult';
 
 const WelcomeMessage = () => (
-    <div className="relative overflow-hidden w-full h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 animate-fade-in">
-        {/* Logo Watermark */}
-        <div className="absolute inset-0 opacity-5 bg-center bg-no-repeat bg-contain" style={{ backgroundImage: `url("data:image/svg+xml,%3csvg width='400' height='400' viewBox='0 0 400 400' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3clinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3e%3cstop offset='0%25' style='stop-color:%233b82f6;stop-opacity:1' /%3e%3cstop offset='100%25' style='stop-color:%231e40af;stop-opacity:1' /%3e%3c/linearGradient%3e%3c/defs%3e%3ccircle cx='200' cy='200' r='180' fill='url(%23grad1)' opacity='0.1'/%3e%3cpath d='M200 50 L320 120 L320 280 Q320 320 280 340 L200 380 L120 340 Q80 320 80 280 L80 120 Z' fill='url(%23grad1)' opacity='0.8'/%3e%3ctext x='200' y='180' text-anchor='middle' font-family='Arial, sans-serif' font-size='48' font-weight='bold' fill='white'%3eAI%3c/text%3e%3ctext x='200' y='220' text-anchor='middle' font-family='Arial, sans-serif' font-size='18' font-weight='bold' fill='white'%3eDETECTOR%3c/text%3e%3ccircle cx='200' cy='140' r='20' fill='none' stroke='white' stroke-width='3'/%3e%3ccircle cx='200' cy='140' r='8' fill='white'/%3e%3ccircle cx='200' cy='140' r='3' fill='%232563eb'/%3e%3c/svg%3e")` }}></div>
-
+    <div className="relative overflow-hidden w-full min-h-screen animate-fade-in">
         <div className="relative p-8 md:p-12">
-            {/* Hero Section */}
-            <div className="text-center mb-10">
-                <div className="relative inline-block mb-6">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
-                    <img
-                        src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=120&h=120&fit=crop&crop=center"
-                        alt="AI Analysis"
-                        className="relative w-24 h-24 rounded-full object-cover border-4 border-white dark:border-slate-700 shadow-lg"
-                    />
+            {/* Hero Section - Two Column Layout */}
+            <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+                {/* Left Column - Welcome Messages */}
+                <div className="space-y-8">
+                    <div>
+                        <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                            AI Misinformation Detector
+                        </h1>
+                        <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+                            In today's digital landscape, misinformation spreads like wildfire through AI-generated content.
+                            Our advanced tool analyzes and verifies information from multiple sources to help you combat false narratives.
+                        </p>
+                    </div>
+
+                    {/* Call to Action */}
+                    <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-6 text-white">
+                        <h3 className="text-xl font-semibold mb-2">Ready to Get Started?</h3>
+                        <p className="mb-4 opacity-90">Choose an input type below—Text, Image, PDF, or Webpage—to begin your analysis and stay informed.</p>
+                        <div className="flex flex-wrap gap-4 text-sm">
+                            <span className="flex items-center">
+                                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                                AI-Powered Analysis
+                            </span>
+                            <span className="flex items-center">
+                                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                                Multi-Language Support
+                            </span>
+                            <span className="flex items-center">
+                                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                                Real-time Results
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                    AI Misinformation Detector
-                </h1>
-                <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                    In today's digital landscape, misinformation spreads like wildfire through AI-generated content.
-                    Our advanced tool analyzes and verifies information from multiple sources to help you combat false narratives.
-                </p>
+
+                {/* Right Column - Dynamic Logo */}
+                <div className="flex justify-center">
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
+                        <div className="relative w-80 h-80 rounded-full border-8 border-white dark:border-slate-700 shadow-2xl flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 animate-spin-slow">
+                            <svg width="200" height="200" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-bounce">
+                                <defs>
+                                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style={{ stopColor: '#f63bf3ff', stopOpacity: 20 }} />
+                                        <stop offset="100%" style={{ stopColor: '#1e8bafff', stopOpacity: 10 }} />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M200 50 L320 120 L320 280 Q320 320 280 340 L200 380 L120 340 Q80 320 80 280 L80 120 Z" fill="url(#grad1)" opacity="0.5" />
+                                <text x="200" y="180" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="48" fontWeight="bold" fill="white">AI</text>
+                                <text x="200" y="220" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="bold" fill="white">Fake News Detector</text>
+                                <circle cx="200" cy="140" r="3" fill="white" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* Feature Cards */}
             <div className="grid md:grid-cols-3 gap-6 mb-10">
-                <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
+                <div className="bg-white/80 dark:bg-slate-800/80 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
                     <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
                         <img
                             src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=48&h=48&fit=crop&crop=center"
@@ -42,7 +83,7 @@ const WelcomeMessage = () => (
                     <p className="text-sm text-slate-600 dark:text-slate-400">Analyze articles, posts, and documents for factual accuracy and bias detection.</p>
                 </div>
 
-                <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
+                <div className="bg-white/80 dark:bg-slate-800/80 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
                     <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
                         <img
                             src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=48&h=48&fit=crop&crop=center"
@@ -54,7 +95,7 @@ const WelcomeMessage = () => (
                     <p className="text-sm text-slate-600 dark:text-slate-400">Verify images, PDFs, and multimedia content for manipulation and authenticity.</p>
                 </div>
 
-                <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
+                <div className="bg-white/80 dark:bg-slate-800/80 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
                     <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
                         <img
                             src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=48&h=48&fit=crop&crop=center"
@@ -64,32 +105,6 @@ const WelcomeMessage = () => (
                     </div>
                     <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-2">Web Content</h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">Scrape and analyze web pages, news articles, and online content sources.</p>
-                </div>
-            </div>
-
-            {/* Call to Action */}
-            <div className="text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-6 text-white">
-                <h3 className="text-xl font-semibold mb-2">Ready to Get Started?</h3>
-                <p className="mb-4 opacity-90">Choose an input type above—Text, Image, PDF, or Webpage—to begin your analysis and stay informed.</p>
-                <div className="flex justify-center space-x-4 text-sm">
-                    <span className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        AI-Powered Analysis
-                    </span>
-                    <span className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        Multi-Language Support
-                    </span>
-                    <span className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        Real-time Results
-                    </span>
                 </div>
             </div>
 
