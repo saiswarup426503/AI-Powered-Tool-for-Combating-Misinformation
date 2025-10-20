@@ -2,119 +2,124 @@ import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react'
 import { analyzeContent, AnalysisInput } from '../services/geminiService';
 import { FullAnalysis } from '../types';
 import { AnalysisResult } from './AnalysisResult';
+import { useTheme } from '../contexts/ThemeContext';
 
-const WelcomeMessage = () => (
-    <div className="relative overflow-hidden w-full min-h-screen animate-fade-in">
-        <div className="relative p-8 md:p-12">
-            {/* Hero Section - Two Column Layout */}
-            <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-                {/* Left Column - Welcome Messages */}
-                <div className="space-y-8">
-                    <div>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                            AI Misinformation Detector
-                        </h1>
-                        <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-                            In today's digital landscape, misinformation spreads like wildfire through AI-generated content.
-                            Our advanced tool analyzes and verifies information from multiple sources to help you combat false narratives.
-                        </p>
+const WelcomeMessage = () => {
+    const { theme } = useTheme();
+
+    return (
+        <div className="relative overflow-hidden w-full min-h-screen animate-fade-in">
+            <div className="relative p-8 md:p-12">
+                {/* Hero Section - Two Column Layout */}
+                <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+                    {/* Left Column - Welcome Messages */}
+                    <div className="space-y-8">
+                        <div>
+                            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                                AI Misinformation Detector
+                            </h1>
+                            <p className="text-xl text-slate-900 leading-relaxed">
+                                In today's digital landscape, misinformation spreads like wildfire through AI-generated content.
+                                Our advanced tool analyzes and verifies information from multiple sources to help you combat false narratives.
+                            </p>
+                        </div>
+
+                        {/* Call to Action */}
+                        <div className={`rounded-lg p-6 text-white ${theme === 'light' ? 'bg-gradient-to-r from-blue-600 to-purple-600' : 'bg-slate-700'}`}>
+                            <h3 className="text-xl font-semibold mb-2">Ready to Get Started?</h3>
+                            <p className="mb-4 opacity-90">Choose an input type below—Text, Image, PDF, or Webpage—to begin your analysis and stay informed.</p>
+                            <div className="flex flex-wrap gap-4 text-sm">
+                                <span className="flex items-center">
+                                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                    AI-Powered Analysis
+                                </span>
+                                <span className="flex items-center">
+                                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                    Multi-Language Support
+                                </span>
+                                <span className="flex items-center">
+                                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                    Real-time Results
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Call to Action */}
-                    <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-6 text-white">
-                        <h3 className="text-xl font-semibold mb-2">Ready to Get Started?</h3>
-                        <p className="mb-4 opacity-90">Choose an input type below—Text, Image, PDF, or Webpage—to begin your analysis and stay informed.</p>
-                        <div className="flex flex-wrap gap-4 text-sm">
-                            <span className="flex items-center">
-                                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    {/* Right Column - Dynamic Logo */}
+                    <div className="flex justify-center">
+                        <div className="relative">
+                            <div className={`absolute inset-0 rounded-full blur-2xl opacity-30 animate-pulse ${theme === 'light' ? 'bg-gradient-to-r from-blue-400 to-purple-500' : 'bg-gradient-to-r from-slate-600 to-slate-500'}`}></div>
+                            <div className={`relative w-80 h-80 rounded-full border-8 shadow-2xl flex items-center justify-center animate-spin-slow ${theme === 'light' ? 'border-white bg-gradient-to-br from-blue-600 to-purple-600' : 'border-slate-700 bg-gradient-to-br from-slate-700 to-slate-600'}`}>
+                                <svg width="200" height="200" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-bounce">
+                                    <defs>
+                                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style={{ stopColor: '#f63bf3ff', stopOpacity: 20 }} />
+                                            <stop offset="100%" style={{ stopColor: '#1e8bafff', stopOpacity: 10 }} />
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M200 50 L320 120 L320 280 Q320 320 280 340 L200 380 L120 340 Q80 320 80 280 L80 120 Z" fill="url(#grad1)" opacity="0.5" />
+                                    <text x="200" y="180" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="48" fontWeight="bold" fill="white">AI</text>
+                                    <text x="200" y="220" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="bold" fill="white">Fake News Detector</text>
+                                    <circle cx="200" cy="140" r="3" fill="white" />
                                 </svg>
-                                AI-Powered Analysis
-                            </span>
-                            <span className="flex items-center">
-                                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                                Multi-Language Support
-                            </span>
-                            <span className="flex items-center">
-                                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                                Real-time Results
-                            </span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Right Column - Dynamic Logo */}
-                <div className="flex justify-center">
-                    <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
-                        <div className="relative w-80 h-80 rounded-full border-8 border-white dark:border-slate-700 shadow-2xl flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 animate-spin-slow">
-                            <svg width="200" height="200" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-bounce">
-                                <defs>
-                                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style={{ stopColor: '#f63bf3ff', stopOpacity: 20 }} />
-                                        <stop offset="100%" style={{ stopColor: '#1e8bafff', stopOpacity: 10 }} />
-                                    </linearGradient>
-                                </defs>
-                                <path d="M200 50 L320 120 L320 280 Q320 320 280 340 L200 380 L120 340 Q80 320 80 280 L80 120 Z" fill="url(#grad1)" opacity="0.5" />
-                                <text x="200" y="180" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="48" fontWeight="bold" fill="white">AI</text>
-                                <text x="200" y="220" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="bold" fill="white">Fake News Detector</text>
-                                <circle cx="200" cy="140" r="3" fill="white" />
-                            </svg>
+                {/* Feature Cards */}
+                <div className="grid md:grid-cols-3 gap-6 mb-10">
+                    <div className={`p-6 rounded-lg shadow-md border hover:shadow-lg transition-shadow duration-300 ${theme === 'light' ? 'bg-white/90 border-slate-200' : 'bg-slate-800/90 border-slate-600'}`}>
+                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${theme === 'light' ? 'bg-blue-100' : 'bg-blue-900'}`}>
+                            <img
+                                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=48&h=48&fit=crop&crop=center"
+                                alt="Text Analysis"
+                                className="w-8 h-8 object-cover rounded"
+                            />
                         </div>
+                        <h3 className={`font-semibold mb-2 ${theme === 'light' ? 'text-slate-800' : 'text-slate-200'}`}>Text Analysis</h3>
+                        <p className={`text-sm ${theme === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Analyze articles, posts, and documents for factual accuracy and bias detection.</p>
                     </div>
+
+                    <div className={`p-6 rounded-lg shadow-md border hover:shadow-lg transition-shadow duration-300 ${theme === 'light' ? 'bg-white/90 border-slate-200' : 'bg-slate-800/90 border-slate-600'}`}>
+                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${theme === 'light' ? 'bg-green-100' : 'bg-green-900'}`}>
+                            <img
+                                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=48&h=48&fit=crop&crop=center"
+                                alt="Image Verification"
+                                className="w-8 h-8 object-cover rounded"
+                            />
+                        </div>
+                        <h3 className={`font-semibold mb-2 ${theme === 'light' ? 'text-slate-800' : 'text-slate-200'}`}>Image & Media</h3>
+                        <p className={`text-sm ${theme === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Verify images, PDFs, and multimedia content for manipulation and authenticity.</p>
+                    </div>
+
+                    <div className={`p-6 rounded-lg shadow-md border hover:shadow-lg transition-shadow duration-300 ${theme === 'light' ? 'bg-white/90 border-slate-200' : 'bg-slate-800/90 border-slate-600'}`}>
+                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${theme === 'light' ? 'bg-purple-100' : 'bg-purple-900'}`}>
+                            <img
+                                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=48&h=48&fit=crop&crop=center"
+                                alt="Web Analysis"
+                                className="w-8 h-8 object-cover rounded"
+                            />
+                        </div>
+                        <h3 className={`font-semibold mb-2 ${theme === 'light' ? 'text-slate-800' : 'text-slate-200'}`}>Web Content</h3>
+                        <p className={`text-sm ${theme === 'light' ? 'text-slate-600' : 'text-slate-400'}`}>Scrape and analyze web pages, news articles, and online content sources.</p>
+                    </div>
+                </div>
+
+                {/* Footer */}
+                <div className={`text-center mt-8 text-sm ${theme === 'light' ? 'text-slate-500' : 'text-slate-400'}`}>
+                    <p>Powered by advanced AI technology for accurate detection and comprehensive analysis.</p>
                 </div>
             </div>
-
-            {/* Feature Cards */}
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
-                <div className="bg-white/80 dark:bg-slate-800/80 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
-                        <img
-                            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=48&h=48&fit=crop&crop=center"
-                            alt="Text Analysis"
-                            className="w-8 h-8 object-cover rounded"
-                        />
-                    </div>
-                    <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-2">Text Analysis</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">Analyze articles, posts, and documents for factual accuracy and bias detection.</p>
-                </div>
-
-                <div className="bg-white/80 dark:bg-slate-800/80 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
-                    <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
-                        <img
-                            src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=48&h=48&fit=crop&crop=center"
-                            alt="Image Verification"
-                            className="w-8 h-8 object-cover rounded"
-                        />
-                    </div>
-                    <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-2">Image & Media</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">Verify images, PDFs, and multimedia content for manipulation and authenticity.</p>
-                </div>
-
-                <div className="bg-white/80 dark:bg-slate-800/80 p-6 rounded-lg shadow-md border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-shadow duration-300">
-                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
-                        <img
-                            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=48&h=48&fit=crop&crop=center"
-                            alt="Web Analysis"
-                            className="w-8 h-8 object-cover rounded"
-                        />
-                    </div>
-                    <h3 className="font-semibold text-slate-800 dark:text-slate-200 mb-2">Web Content</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">Scrape and analyze web pages, news articles, and online content sources.</p>
-                </div>
-            </div>
-
-            {/* Footer */}
-            <div className="text-center mt-8 text-sm text-slate-500 dark:text-slate-400">
-                <p>Powered by advanced AI technology for accurate detection and comprehensive analysis.</p>
-            </div>
-        </div>
-    </div >
-);
+        </div >
+    );
+};
 
 const loadingMessages = [
     "Initializing analysis...",
@@ -164,18 +169,6 @@ const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
 type Mode = 'text' | 'image' | 'pdf' | 'url';
 
-const TabButton: React.FC<{ active: boolean; onClick: () => void; children: React.ReactNode }> = ({ active, onClick, children }) => (
-    <button
-        onClick={onClick}
-        className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-md transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 ${active
-            ? 'bg-blue-600 text-white shadow'
-            : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
-            }`}
-    >
-        {children}
-    </button>
-);
-
 const languages = [
     { name: 'Afrikaans' }, { name: 'Albanian' }, { name: 'Amharic' }, { name: 'Arabic' },
     { name: 'Armenian' }, { name: 'Azerbaijani' }, { name: 'Basque' }, { name: 'Belarusian' },
@@ -205,7 +198,20 @@ const languages = [
     { name: 'Xhosa' }, { name: 'Yiddish' }, { name: 'Yoruba' }, { name: 'Zulu' }
 ].sort((a, b) => a.name.localeCompare(b.name));
 
+const TabButton: React.FC<{ active: boolean; onClick: () => void; children: React.ReactNode }> = ({ active, onClick, children }) => (
+    <button
+        onClick={onClick}
+        className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-md transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 ${active
+            ? 'bg-blue-600 text-white shadow'
+            : 'text-slate-900 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+            }`}
+    >
+        {children}
+    </button>
+);
+
 export const MisinformationAnalyzer: React.FC = () => {
+    const { theme } = useTheme();
     const [mode, setMode] = useState<Mode>('text');
     const [inputText, setInputText] = useState<string>('');
     const [url, setUrl] = useState<string>('');
@@ -392,7 +398,7 @@ export const MisinformationAnalyzer: React.FC = () => {
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
                             placeholder={isRecording ? "Listening..." : "Paste text or use the microphone to dictate..."}
-                            className="w-full p-3 pr-14 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700 placeholder-slate-400 dark:placeholder-slate-500"
+                            className="w-full p-3 pr-14 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                             disabled={isLoading}
                         />
                         {isSpeechRecognitionSupported && (
@@ -420,7 +426,7 @@ export const MisinformationAnalyzer: React.FC = () => {
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         placeholder="https://example.com/news-article"
-                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700 placeholder-slate-400 dark:placeholder-slate-500"
+                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                         disabled={isLoading}
                     />
                 );
@@ -473,7 +479,7 @@ export const MisinformationAnalyzer: React.FC = () => {
             <div className="container mx-auto px-4 py-8">
                 <hr className="my-8 border-slate-300 dark:border-slate-700" />
                 <div className="w-full space-y-6">
-                    <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg">
+                    <div className={`p-6 rounded-lg shadow-lg ${theme === 'light' ? 'bg-white' : 'bg-slate-800'}`}>
                         <div className="flex items-center justify-center space-x-2 sm:space-x-4 mb-6">
                             <TabButton active={mode === 'text'} onClick={() => resetInputs('text')}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 11-2 0V4a1 1 0 00-1-1H7a1 1 0 00-1 1v12a1 1 0 11-2 0V4z" clipRule="evenodd" /></svg>
@@ -503,7 +509,7 @@ export const MisinformationAnalyzer: React.FC = () => {
                                 id="language-select"
                                 value={outputLanguage}
                                 onChange={(e) => setOutputLanguage(e.target.value)}
-                                className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700"
+                                className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                                 disabled={isLoading}
                                 aria-label="Select report language"
                             >
@@ -520,7 +526,7 @@ export const MisinformationAnalyzer: React.FC = () => {
                         </button>
                     </div>
 
-                    <div className="bg-slate-50 dark:bg-slate-700 p-6 rounded-lg shadow-lg border border-slate-200 dark:border-slate-600">
+                    <div className={`p-6 rounded-lg shadow-lg ${theme === 'light' ? 'bg-white' : 'bg-slate-800'}`}>
                         <h2 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Analysis Results</h2>
                         {isLoading && <LoadingSpinner message={loadingMessage} />}
                         {error && !isLoading && <ErrorMessage message={error} />}
