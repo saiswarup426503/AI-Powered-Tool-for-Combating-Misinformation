@@ -4,7 +4,6 @@ live at https://ai-misleadinformation.vercel.app/
 
 This contains everything you need to run your app locally.
 
->>>>>>> d341868d91c09f688e0151d0149839e027c3a83e
 
 ## Run Locally
 
